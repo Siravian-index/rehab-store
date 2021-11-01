@@ -1,0 +1,15 @@
+const SingleSell = ({ item }) => {
+  return (
+    <li className='text-left my-5'>
+      <div>
+        <span>Seller</span>: {item.sellerName}
+      </div>
+      <div>Client: {item.clientName} </div>
+      <div>Client ID: {item.clientID} </div>
+      <div>ProductName: {item.productName} </div>
+      <div>id: {item.id} </div>
+    </li>
+  );
+};
+
+export default SingleSell;

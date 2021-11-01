@@ -4,7 +4,7 @@ const Store = () => {
       <h3>What do you need to do?</h3>
       <div>
         <button>New sell</button>
-        <button>See sells</button>
+        <button>See seels</button>
       </div>
     </div>
   );

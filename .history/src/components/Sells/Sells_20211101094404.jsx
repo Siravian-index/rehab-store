@@ -1,4 +1,6 @@
-const Store = () => {
+import NewSell from './NewSell';
+
+const Sells = () => {
   return (
     <div>
       <h3>What do you need to do?</h3>
@@ -6,8 +8,10 @@ const Store = () => {
         <button>New sell</button>
         <button>See sells</button>
       </div>
+
+      <NewSell />
     </div>
   );
 };
 
-export default Store;
+export default Sells;
