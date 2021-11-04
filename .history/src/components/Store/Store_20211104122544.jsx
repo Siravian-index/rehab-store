@@ -1,28 +1,25 @@
 import { useState } from 'react';
-import NewSell from './NewSell';
 import { v4 as uuidv4 } from 'uuid';
-import SearchBar from './SearchBar';
+import NewProduct from './NewProduct';
+import ListProducts from './ListProducts';
 
-const Sells = () => {
+const Store = () => {
   const [action, setAction] = useState('');
-  const [newSoldProduct, setNewSoldProduct] = useState({
-    sellerName: '',
-    clientName: '',
-    clientID: '',
+  const [newProduct, setNewProduct] = useState({
     productName: '',
+    description: '',
     productPrice: '',
     id: uuidv4(),
   });
-  const [sellData, setSellData] = useState([
+  const [productData, setProductData] = useState([
     {
-      sellerName: 'Juan Lopez',
-      clientName: 'Marcos Aguilar',
-      clientID: '843233834',
       productName: 'Bananas',
+      description: 'some yellow bananas',
       productPrice: '15',
       id: uuidv4(),
     },
   ]);
+
   return (
     <div>
       <div className='flex flex-col justify-center items-center gap-4 my-5'>
@@ -34,7 +31,7 @@ const Sells = () => {
               setAction('add');
             }}
           >
-            New sell
+            New Product
           </button>
           <button
             className='bg-black hover:bg-gray-900 text-white text-center py-2 px-4 rounded'
@@ -46,20 +43,22 @@ const Sells = () => {
           </button>
         </div>
       </div>
-
       {action === 'add' && (
-        <NewSell
-          newSoldProduct={newSoldProduct}
-          setNewSoldProduct={setNewSoldProduct}
-          setSellData={setSellData}
-          sellData={sellData}
+        <NewProduct
+          newProduct={newProduct}
+          setNewProduct={setNewProduct}
+          productData={productData}
+          setProductData={setProductData}
         />
       )}
       {action === 'list' && (
-        <SearchBar sellData={sellData} setSellData={setSellData} />
+        <SearchBarProducts
+          productData={productData}
+          setProductData={setProductData}
+        />
       )}
     </div>
   );
 };
 
-export default Sells;
+export default Store;

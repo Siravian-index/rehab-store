@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ListSells from './ListSells';
 import NewSell from './NewSell';
 import { v4 as uuidv4 } from 'uuid';
 import SearchBar from './SearchBar';
