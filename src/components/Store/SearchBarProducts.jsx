@@ -2,17 +2,18 @@ import { useState, useContext } from 'react';
 import { ProductsContext } from '../../context/ProductsContext';
 import SingleProduct from './SingleProduct';
 
-const SearchBar = ({ productData, setProductData }) => {
+const SearchBar = () => {
   const [searchValue, setSearchValue] = useState('');
   const [selectValue, setSelectValue] = useState('description');
   // context
-  const { products, setProducts } = useContext(ProductsContext);
+  const { products } = useContext(ProductsContext);
 
-  const filteredProducts = productData.filter((product) => {
+  const filteredProducts = products.filter((product) => {
     return product[selectValue]
       .toLowerCase()
       .includes(searchValue.toLowerCase());
   });
+
   return (
     <>
       <div className='flex flex-col items-center justify-center gap-1'>
@@ -35,19 +36,12 @@ const SearchBar = ({ productData, setProductData }) => {
             Product's Description
           </option>
           <option value='productName'>Product's Name</option>
-          <option value='id'>Product's Id</option>
+          <option value='_id'>Product's Id</option>
         </select>
       </div>
       <ul className='w-1/3 mx-auto my-3 border px-4'>
         {filteredProducts.map((item) => {
-          return (
-            <SingleProduct
-              productData={productData}
-              setProductData={setProductData}
-              item={item}
-              key={item.id}
-            />
-          );
+          return <SingleProduct item={item} key={item._id} />;
         })}
       </ul>
     </>

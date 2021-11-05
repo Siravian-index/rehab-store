@@ -1,20 +1,16 @@
-import { v4 as uuidv4 } from 'uuid';
+import { useContext } from 'react';
+import { ProductsContext } from '../../context/ProductsContext';
 
-const NewProduct = ({
-  newProduct,
-  setNewProduct,
-  productData,
-  setProductData,
-}) => {
-  const addNewProduct = () => {
-    setProductData([...productData, newProduct]);
-  };
+const NewProduct = () => {
+  const { createProduct, newlyCreatedProduct, setNewlyCreatedProduct } =
+    useContext(ProductsContext);
+
   const clearForm = () => {
-    setNewProduct({
+    setNewlyCreatedProduct({
       productName: '',
       description: '',
       productPrice: '',
-      id: uuidv4(),
+      status: '',
     });
   };
   return (
@@ -23,7 +19,7 @@ const NewProduct = ({
         action=''
         onSubmit={(event) => {
           event.preventDefault();
-          addNewProduct();
+          createProduct(newlyCreatedProduct);
           clearForm();
         }}
         className='flex flex-col justify-center items-center gap-5'
@@ -34,10 +30,10 @@ const NewProduct = ({
             id='productName'
             type='text'
             placeholder='Product Name'
-            value={newProduct.productName}
+            value={newlyCreatedProduct.productName}
             onChange={(e) => {
-              setNewProduct({
-                ...newProduct,
+              setNewlyCreatedProduct({
+                ...newlyCreatedProduct,
                 productName: e.target.value,
               });
             }}
@@ -49,10 +45,10 @@ const NewProduct = ({
             required
             id='description'
             placeholder='Product description'
-            value={newProduct.description}
+            value={newlyCreatedProduct.description}
             onChange={(e) => {
-              setNewProduct({
-                ...newProduct,
+              setNewlyCreatedProduct({
+                ...newlyCreatedProduct,
                 description: e.target.value,
               });
             }}
@@ -64,15 +60,31 @@ const NewProduct = ({
             id='productPrice'
             type='text'
             placeholder='Product Price'
-            value={newProduct.productPrice}
+            value={newlyCreatedProduct.productPrice}
             onChange={(e) => {
-              setNewProduct({
-                ...newProduct,
+              setNewlyCreatedProduct({
+                ...newlyCreatedProduct,
                 productPrice: e.target.value,
               });
             }}
           />
         </label>
+        <label htmlFor='status'>
+          <input
+            required
+            id='status'
+            type='text'
+            placeholder='Status'
+            value={newlyCreatedProduct.status}
+            onChange={(e) => {
+              setNewlyCreatedProduct({
+                ...newlyCreatedProduct,
+                status: e.target.value,
+              });
+            }}
+          />
+        </label>
+
         <button
           className='bg-black hover:bg-gray-900 text-white text-center py-2 px-4 rounded'
           type='submit'
