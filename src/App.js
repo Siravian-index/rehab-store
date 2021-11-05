@@ -30,9 +30,11 @@ const App = () => {
             </ProductsContextProvider>
           </Route>
           <Route path='/sells'>
-            <SellsContextProvider>
-              <Sells />
-            </SellsContextProvider>
+            <ProductsContextProvider>
+              <SellsContextProvider>
+                <Sells />
+              </SellsContextProvider>
+            </ProductsContextProvider>
           </Route>
           <Route path='/users'></Route>
           <Route path='/'>

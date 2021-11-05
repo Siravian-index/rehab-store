@@ -2,6 +2,7 @@ import { useState } from 'react';
 import NewSell from './NewSell';
 import { v4 as uuidv4 } from 'uuid';
 import SearchBar from './SearchBar';
+// import { ProductsContext } from '../../context/ProductsContext';
 
 const Sells = () => {
   const [action, setAction] = useState('');

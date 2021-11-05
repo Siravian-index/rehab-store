@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 const SingleSell = ({ item, setSellData, sellData }) => {
   return (
     <li className='text-left my-5'>

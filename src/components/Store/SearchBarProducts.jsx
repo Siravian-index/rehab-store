@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { ProductsContext } from '../../context/ProductsContext';
 import SingleProduct from './SingleProduct';
 
 const SearchBar = ({ productData, setProductData }) => {
   const [searchValue, setSearchValue] = useState('');
   const [selectValue, setSelectValue] = useState('description');
+  // context
+  const { products, setProducts } = useContext(ProductsContext);
 
   const filteredProducts = productData.filter((product) => {
     return product[selectValue]

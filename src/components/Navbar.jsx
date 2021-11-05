@@ -3,7 +3,9 @@ import LogoutButton from './LogoutButton';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  // const { user, isAuthenticated, isLoading } = useAuth0();
+  const { user } = useAuth0();
+
   // console.log(user);
 
   return (
