@@ -27,7 +27,7 @@ const SearchBar = ({ sellData, setSellData }) => {
           }}
         >
           <option value='sellerName'>Seller's Name</option>
-          <option selected value='clientName'>
+          <option defaultValue value='clientName'>
             Client's Name
           </option>
           <option value='clientID'>Client's Id</option>

@@ -4,6 +4,7 @@ import NewProduct from './NewProduct';
 import SearchBarProducts from './SearchBarProducts';
 
 const Store = () => {
+  // only needs action state
   const [action, setAction] = useState('');
   const [newProduct, setNewProduct] = useState({
     productName: '',

@@ -1,11 +1,14 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
+// components
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Sells from './components/Sells/Sells';
 import Store from './components/Store/Store';
 import WelcomePage from './components/WelcomePage';
+// context
+import ProductsContextProvider from './context/ProductsContext';
+import SellsContextProvider from './context/SellsContext';
 
 const App = () => {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -22,10 +25,14 @@ const App = () => {
         <Navbar />
         <Switch>
           <Route path='/store'>
-            <Store />
+            <ProductsContextProvider>
+              <Store />
+            </ProductsContextProvider>
           </Route>
           <Route path='/sells'>
-            <Sells />
+            <SellsContextProvider>
+              <Sells />
+            </SellsContextProvider>
           </Route>
           <Route path='/users'></Route>
           <Route path='/'>

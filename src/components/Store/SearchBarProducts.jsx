@@ -28,7 +28,7 @@ const SearchBar = ({ productData, setProductData }) => {
             setSelectValue(e.target.value);
           }}
         >
-          <option selected value='description'>
+          <option defaultValue value='description'>
             Product's Description
           </option>
           <option value='productName'>Product's Name</option>

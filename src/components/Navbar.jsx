@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
-  console.log(user);
+  // console.log(user);
 
   return (
     <nav className='flex justify-between border '>
