@@ -22,7 +22,6 @@ const SellsContextProvider = ({ children }) => {
   const getAllSells = async () => {
     const res = await fetch('http://localhost:8000/api/sells');
     const sells = await res.json();
-    console.log(sells.data);
     setSellList(sells.data);
   };
   // place all the products in state
