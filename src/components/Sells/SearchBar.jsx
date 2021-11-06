@@ -1,13 +1,18 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { SellsContext } from '../../context/SellsContext';
 import SingleSell from './SingleSell';
 
-const SearchBar = ({ sellData, setSellData }) => {
+const SearchBar = () => {
   const [searchValue, setSearchValue] = useState('');
   const [selectValue, setSelectValue] = useState('clientName');
+  // context
+  const { sellList } = useContext(SellsContext);
 
-  const filteredProducts = sellData.filter((sell) => {
+  // filter sells
+  const filteredSells = sellList.filter((sell) => {
     return sell[selectValue].toLowerCase().includes(searchValue.toLowerCase());
   });
+
   return (
     <>
       <div className='flex flex-col items-center justify-center gap-1'>
@@ -26,24 +31,17 @@ const SearchBar = ({ sellData, setSellData }) => {
             setSelectValue(e.target.value);
           }}
         >
-          <option value='sellerName'>Seller's Name</option>
           <option defaultValue value='clientName'>
             Client's Name
           </option>
           <option value='clientID'>Client's Id</option>
-          <option value='id'>Product's Id</option>
+          <option value='_id'>Product's Id</option>
         </select>
       </div>
-      <ul className='w-1/3 mx-auto my-3 border px-4'>
-        {filteredProducts.map((item) => {
-          return (
-            <SingleSell
-              setSellData={setSellData}
-              sellData={sellData}
-              item={item}
-              key={item.id}
-            ></SingleSell>
-          );
+      {/* <ul className='flex flex-col md:flex-row md:justify-around md:items-center flex-wrap'> */}
+      <ul className='md:w-1/3 mx-auto my-3 border px-4'>
+        {filteredSells.map((item) => {
+          return <SingleSell item={item} key={item._id}></SingleSell>;
         })}
       </ul>
     </>

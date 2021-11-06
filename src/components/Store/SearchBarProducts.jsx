@@ -39,7 +39,7 @@ const SearchBar = () => {
           <option value='_id'>Product's Id</option>
         </select>
       </div>
-      <ul className='w-1/3 mx-auto my-3 border px-4'>
+      <ul className='md:w-1/3 mx-auto my-3 border px-4'>
         {filteredProducts.map((item) => {
           return <SingleProduct item={item} key={item._id} />;
         })}

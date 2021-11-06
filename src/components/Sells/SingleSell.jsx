@@ -1,29 +1,46 @@
-const SingleSell = ({ item, setSellData, sellData }) => {
+import { SellsContext } from '../../context/SellsContext';
+import { useContext } from 'react';
+
+const SingleSell = ({ item }) => {
+  const { removeSellById } = useContext(SellsContext);
+
   return (
     <li className='text-left my-5'>
       <div>
-        <span className='font-bold'>Seller</span>: {item.sellerName}
+        <span className='font-bold'>Seller:</span> {item.sellerName}
       </div>
       <div>
-        <span className='font-bold'>Client</span>: {item.clientName}
+        <span className='font-bold'>Client:</span> {item.clientName}
       </div>
       <div>
-        <span className='font-bold'>Client ID</span>: {item.clientID}
+        <span className='font-bold'>Client ID:</span> {item.clientID}
       </div>
       <div>
-        <span className='font-bold'>Product Name</span> {item.productName}
+        <span className='font-bold'>Total:</span> {item.totalValue}
       </div>
       <div>
-        <span className='font-bold'>Price:</span> {item.productPrice}
-      </div>
-      <div>
-        <span className='font-bold'>id:</span> {item.id}
+        <span className='font-bold'>Details: </span>
+        {item.products.map((product) => (
+          <div className='ml-4 my-1 pb-1 border-b' key={product.productName}>
+            <p className='font-bold'>
+              Product:
+              <span className='font-normal'>{product.productName}</span>
+            </p>
+            <p className='font-bold'>
+              Price: <span className='font-normal'>{product.productPrice}</span>
+            </p>
+            <p className='font-bold'>
+              Amount:
+              <span className='font-normal'>{product.productAmount}</span>
+            </p>
+          </div>
+        ))}
       </div>
       <div className='flex items-center justify-center gap-4 mt-4'>
         <button
           className='bg-transparent border border-red-500 text-red-500 hover:bg-red-500 hover:text-white text-center py-1 px-2 rounded'
           onClick={() => {
-            setSellData(sellData.filter((obj) => obj.id !== item.id));
+            removeSellById(item._id);
           }}
         >
           Delete

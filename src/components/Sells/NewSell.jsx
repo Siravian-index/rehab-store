@@ -1,60 +1,35 @@
-import { v4 as uuidv4 } from 'uuid';
+import { useContext, useState } from 'react';
+import { SellsContext } from '../../context/SellsContext';
+import { ProductsContext } from '../../context/ProductsContext';
 
-const NewSell = ({
-  newSoldProduct,
-  setNewSoldProduct,
-  setSellData,
-  sellData,
-}) => {
-  const addNewSell = () => {
-    setSellData([...sellData, newSoldProduct]);
-  };
-  const clearForm = () => {
-    setNewSoldProduct({
-      sellerName: '',
-      clientName: '',
-      clientID: '',
-      productName: '',
-      productPrice: '',
-      id: uuidv4(),
-    });
-  };
+const NewSell = () => {
+  const [formValues, setFormValues] = useState([
+    { productName: '', productAmount: '', productPrice: '' },
+  ]);
+  // context
+  const { newSell, setNewSell } = useContext(SellsContext);
+  const { products } = useContext(ProductsContext);
+  // console.log(products);
+  console.log(newSell);
   return (
     <div>
       <form
         action=''
         onSubmit={(event) => {
           event.preventDefault();
-          addNewSell();
-          clearForm();
         }}
         className='flex flex-col justify-center items-center gap-5'
       >
-        <label htmlFor='seller'>
-          <input
-            required
-            id='seller'
-            type='text'
-            placeholder='Seller Name'
-            value={newSoldProduct.sellerName}
-            onChange={(e) => {
-              setNewSoldProduct({
-                ...newSoldProduct,
-                sellerName: e.target.value,
-              });
-            }}
-          />
-        </label>
         <label htmlFor='client'>
           <input
             required
             id='client'
             type='text'
             placeholder='Client Name'
-            value={newSoldProduct.clientName}
+            value={newSell.clientName}
             onChange={(e) => {
-              setNewSoldProduct({
-                ...newSoldProduct,
+              setNewSell({
+                ...newSell,
                 clientName: e.target.value,
               });
             }}
@@ -64,43 +39,13 @@ const NewSell = ({
           <input
             required
             id='client'
-            type='text'
+            type='number'
             placeholder='Client ID'
-            value={newSoldProduct.clientID}
+            value={newSell.clientID}
             onChange={(e) => {
-              setNewSoldProduct({
-                ...newSoldProduct,
+              setNewSell({
+                ...newSell,
                 clientID: e.target.value,
-              });
-            }}
-          />
-        </label>
-        <label htmlFor='productName'>
-          <input
-            required
-            id='productName'
-            type='text'
-            placeholder='Product Name'
-            value={newSoldProduct.productName}
-            onChange={(e) => {
-              setNewSoldProduct({
-                ...newSoldProduct,
-                productName: e.target.value,
-              });
-            }}
-          />
-        </label>
-        <label htmlFor='productPrice'>
-          <input
-            required
-            id='productPrice'
-            type='text'
-            placeholder='Product Price'
-            value={newSoldProduct.productPrice}
-            onChange={(e) => {
-              setNewSoldProduct({
-                ...newSoldProduct,
-                productPrice: e.target.value,
               });
             }}
           />
@@ -109,7 +54,7 @@ const NewSell = ({
           className='bg-black hover:bg-gray-900 text-white text-center py-2 px-4 rounded'
           type='submit'
         >
-          Add
+          Submit
         </button>
       </form>
     </div>
@@ -117,3 +62,16 @@ const NewSell = ({
 };
 
 export default NewSell;
+
+// <div className='border p-4'>
+// <label htmlFor='counter'>
+//   <input type='number' name='counter' id='counter' min='1' max='99' />
+// </label>
+// <select name='productsOptions' id='productsOptions'>
+//   {products.map((product) => (
+//     <option key={product._id} value={product.productName}>
+//       {product.productName}
+//     </option>
+//   ))}
+// </select>
+// </div>

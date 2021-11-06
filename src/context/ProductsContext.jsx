@@ -47,8 +47,8 @@ const ProductsContextProvider = ({ children }) => {
         products,
         setProducts,
         createProduct,
-        removeProductById,
         editProductById,
+        removeProductById,
         newlyCreatedProduct,
         setNewlyCreatedProduct,
       }}
