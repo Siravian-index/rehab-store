@@ -14,12 +14,15 @@ const NewSell = () => {
   const { products } = useContext(ProductsContext);
   // oauth
   const { user } = useAuth0();
-  console.log(user.name);
   // useEffect
   useEffect(() => {
     setTotal(getTotal(formValues));
   }, [formValues]);
 
+  useEffect(() => {
+    updateNewSellState(user.name, formValues);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [total, formValues, user.name]);
   // helper functions
   const handleChange = (i, e) => {
     let newFormValues = [...formValues];
@@ -47,12 +50,49 @@ const NewSell = () => {
     }, 0);
   };
 
+  const updateNewSellState = async (sellerName, arr) => {
+    let products = arr.reduce((prev, obj) => {
+      let [product, price] = obj.product.split(delimiter);
+      if (product && price) {
+        prev.push({
+          productName: product,
+          productPrice: price,
+          productAmount: obj.productAmount,
+        });
+      }
+      return prev;
+    }, []);
+    await setNewSell({
+      ...newSell,
+      totalValue: total,
+      sellerName: sellerName,
+      products: products,
+    });
+  };
+  const clearForm = () => {
+    setFormValues([{ product: '', productAmount: '' }]);
+    setNewSell({
+      clientName: '',
+      clientID: '',
+      totalValue: '',
+      sellerName: '',
+      products: [
+        {
+          productName: '',
+          productPrice: '',
+          productAmount: '',
+        },
+      ],
+    });
+  };
+
   return (
     <div>
       <form
         action='POST'
         onSubmit={(event) => {
           event.preventDefault();
+          createSell(newSell);
         }}
         className='flex flex-col justify-center items-center gap-5'
       >
@@ -147,6 +187,14 @@ const NewSell = () => {
           Submit
         </button>
       </form>
+      <div className='flex justify-center items-center mt-4'>
+        <button
+          className='bg-black hover:bg-gray-900 text-white text-center py-2 px-4 rounded'
+          onClick={() => clearForm()}
+        >
+          Clear
+        </button>
+      </div>
     </div>
   );
 };

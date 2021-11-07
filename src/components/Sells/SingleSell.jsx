@@ -20,8 +20,8 @@ const SingleSell = ({ item }) => {
       </div>
       <div>
         <span className='font-bold'>Details: </span>
-        {item.products.map((product) => (
-          <div className='ml-4 my-1 pb-1 border-b' key={product.productName}>
+        {item.products.map((product, index) => (
+          <div className='ml-4 my-1 pb-1 border-b' key={index}>
             <p className='font-bold'>
               Product:
               <span className='font-normal'>{product.productName}</span>
