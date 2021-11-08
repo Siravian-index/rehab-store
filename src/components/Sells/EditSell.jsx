@@ -2,13 +2,17 @@ import { useContext, useEffect } from 'react';
 import { SellsContext } from '../../context/SellsContext';
 import { ProductsContext } from '../../context/ProductsContext';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useParams } from 'react-router';
 
-const NewSell = () => {
-  // context
+const EditSell = () => {
+  const { products } = useContext(ProductsContext);
+  const { user } = useAuth0();
+  const { id } = useParams();
+
+  console.log(products);
   const {
     newSell,
     setNewSell,
-    createSell,
     formValues,
     clearForm,
     delimiter,
@@ -18,30 +22,22 @@ const NewSell = () => {
     addFormFields,
     removeFormFields,
     getTotal,
-    updateNewSellState,
+    updatedSell,
+    setUpdatedSell,
   } = useContext(SellsContext);
-  const { products } = useContext(ProductsContext);
-  // oauth
-  const { user } = useAuth0();
-  // useEffect
   useEffect(() => {
     setTotal(getTotal(formValues));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formValues]);
-
-  useEffect(() => {
-    updateNewSellState(user.name, formValues);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [total, formValues, user.name]);
-  // helper functions
-
   return (
     <div>
+      <h3 className='text-center my-5'>Edit Sell</h3>
+      <h3 className='text-center my-5'>Sell's id: {id}</h3>
+
       <form
         action='POST'
         onSubmit={(event) => {
           event.preventDefault();
-          createSell(newSell);
         }}
         className='flex flex-col justify-center items-center gap-5'
       >
@@ -149,4 +145,4 @@ const NewSell = () => {
   );
 };
 
-export default NewSell;
+export default EditSell;

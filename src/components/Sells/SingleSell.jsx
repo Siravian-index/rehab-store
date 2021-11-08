@@ -1,5 +1,6 @@
 import { SellsContext } from '../../context/SellsContext';
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 const SingleSell = ({ item }) => {
   const { removeSellById } = useContext(SellsContext);
@@ -45,14 +46,11 @@ const SingleSell = ({ item }) => {
         >
           Delete
         </button>
-        <button
-          className='bg-transparent border border-gray-500 text-gray-500 hover:bg-gray-500 hover:text-white text-center py-1 px-2 rounded'
-          onClick={() => {
-            console.log('/edit/:id');
-          }}
-        >
-          Edit
-        </button>
+        <Link to={`/edit/sell/${item._id}`}>
+          <button className='bg-transparent border border-gray-500 text-gray-500 hover:bg-gray-500 hover:text-white text-center py-1 px-2 rounded'>
+            Edit
+          </button>
+        </Link>
       </div>
     </li>
   );

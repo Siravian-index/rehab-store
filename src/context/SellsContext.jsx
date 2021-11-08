@@ -18,12 +18,33 @@ const SellsContextProvider = ({ children }) => {
     ],
   });
 
+  const [updatedSell, setUpdatedSell] = useState({
+    clientName: '',
+    clientID: '',
+    totalValue: '',
+    sellerName: '',
+    _id: '',
+    products: [
+      {
+        productName: '',
+        productPrice: '',
+        productAmount: '',
+      },
+    ],
+  });
   // fetch all sells from db
   const getAllSells = async () => {
     const res = await fetch('http://localhost:8000/api/sells');
     const sells = await res.json();
     setSellList(sells.data);
   };
+  // get one sell by id
+  const getOneSellById = async (_id) => {
+    const res = await fetch(`http://localhost:8000/api/sell/${_id}`);
+    const sell = await res.json();
+    setUpdatedSell(sell.data);
+  };
+
   // place all the products in state
   useEffect(() => {
     getAllSells();
@@ -49,6 +70,76 @@ const SellsContextProvider = ({ children }) => {
 
   // edit product
   const editSellById = async (id) => {};
+
+  // -------------------------------------
+  // newSell Logic
+  const [formValues, setFormValues] = useState([
+    { product: '', productAmount: '' },
+  ]);
+  // clearForm
+  const clearForm = () => {
+    setFormValues([{ product: '', productAmount: '' }]);
+    setNewSell({
+      clientName: '',
+      clientID: '',
+      totalValue: '',
+      sellerName: '',
+      products: [
+        {
+          productName: '',
+          productPrice: '',
+          productAmount: '',
+        },
+      ],
+    });
+  };
+  const delimiter = ':>>';
+  const [total, setTotal] = useState('');
+  const handleChange = (i, e) => {
+    let newFormValues = [...formValues];
+    newFormValues[i][e.target.name] = e.target.value;
+    setFormValues(newFormValues);
+  };
+
+  const addFormFields = () => {
+    setFormValues([...formValues, { product: '', productAmount: '' }]);
+  };
+
+  const removeFormFields = (i) => {
+    let newFormValues = [...formValues];
+    newFormValues.splice(i, 1);
+    setFormValues(newFormValues);
+  };
+
+  const getTotal = (arr) => {
+    return arr.reduce((prev, obj) => {
+      let [product, price] = obj.product.split(delimiter);
+      if (product && price) {
+        return prev + Number(price) * Number(obj.productAmount);
+      }
+      return prev;
+    }, 0);
+  };
+
+  const updateNewSellState = async (sellerName, arr) => {
+    let products = arr.reduce((prev, obj) => {
+      let [product, price] = obj.product.split(delimiter);
+      if (product && price) {
+        prev.push({
+          productName: product,
+          productPrice: price,
+          productAmount: obj.productAmount,
+        });
+      }
+      return prev;
+    }, []);
+    await setNewSell({
+      ...newSell,
+      totalValue: total,
+      sellerName: sellerName,
+      products: products,
+    });
+  };
   return (
     <SellsContext.Provider
       value={{
@@ -59,6 +150,20 @@ const SellsContextProvider = ({ children }) => {
         sellList,
         setSellList,
         createSell,
+        updatedSell,
+        setUpdatedSell,
+        getOneSellById,
+        clearForm,
+        formValues,
+        setFormValues,
+        delimiter,
+        handleChange,
+        total,
+        setTotal,
+        addFormFields,
+        removeFormFields,
+        getTotal,
+        updateNewSellState,
       }}
     >
       {children}

@@ -27,19 +27,13 @@ const SingleProduct = ({ item }) => {
         <button
           className='bg-transparent border border-red-500 text-red-500 hover:bg-red-500 hover:text-white text-center py-1 px-2 rounded'
           onClick={() => {
-            console.log(item._id);
             removeProductById(item._id);
           }}
         >
           Delete
         </button>
         <Link to={`/edit/product/${item._id}`}>
-          <button
-            className='bg-transparent border border-gray-500 text-gray-500 hover:bg-gray-500 hover:text-white text-center py-1 px-2 rounded'
-            onClick={() => {
-              console.log('/edit/:id');
-            }}
-          >
+          <button className='bg-transparent border border-gray-500 text-gray-500 hover:bg-gray-500 hover:text-white text-center py-1 px-2 rounded'>
             Edit
           </button>
         </Link>

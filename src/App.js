@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // components
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
+import EditSell from './components/Sells/EditSell';
 import Sells from './components/Sells/Sells';
 import EditProduct from './components/Store/EditProduct';
 import Store from './components/Store/Store';
@@ -39,6 +40,13 @@ const App = () => {
             <ProductsContextProvider>
               <SellsContextProvider>
                 <Sells />
+              </SellsContextProvider>
+            </ProductsContextProvider>
+          </Route>
+          <Route exact path='/edit/sell/:id'>
+            <ProductsContextProvider>
+              <SellsContextProvider>
+                <EditSell />
               </SellsContextProvider>
             </ProductsContextProvider>
           </Route>
