@@ -129,6 +129,7 @@ const NewSell = () => {
         {formValues.map((element, index) => (
           <div className='flex justify-center items-center gap-x-5' key={index}>
             <select
+              className=' bg-white border border-gray-400 hover:border-gray-500 px-2 py-1 pr-3 rounded shadow leading-tight focus:outline-none focus:shadow-outline'
               id='product'
               name='product'
               onChange={(e) => handleChange(index, e)}
@@ -160,7 +161,7 @@ const NewSell = () => {
             {index ? (
               <button
                 type='button'
-                className=' bg-red-200 hover:bg-red-500 hover:text-white text-red-500 text-center py-1 px-1 rounded'
+                className=' bg-red-200 hover:bg-red-500 hover:text-white text-red-500 text-center py-1 px-2 rounded'
                 onClick={() => removeFormFields(index)}
               >
                 -
