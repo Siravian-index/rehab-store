@@ -10,12 +10,36 @@ const ProductsContextProvider = ({ children }) => {
     productPrice: '',
     status: '',
   });
+  const [updatedProduct, setUpdatedProduct] = useState({
+    productName: '',
+    description: '',
+    productPrice: '',
+    status: '',
+    _id: '',
+  });
+  // clear form
+  const clearForm = () => {
+    setNewlyCreatedProduct({
+      productName: '',
+      description: '',
+      productPrice: '',
+      status: '',
+    });
+  };
+
   // fetch all products from db
   const getAllProducts = async () => {
     const res = await fetch('http://localhost:8000/api/products');
     const products = await res.json();
     setProducts(products.data);
   };
+  // get one product by id
+  const getOneProductById = async (_id) => {
+    const res = await fetch(`http://localhost:8000/api/product/${_id}`);
+    const product = await res.json();
+    setUpdatedProduct(product.data);
+  };
+
   // place all the products in state
   useEffect(() => {
     getAllProducts();
@@ -40,7 +64,16 @@ const ProductsContextProvider = ({ children }) => {
   };
 
   // edit product
-  const editProductById = async (id) => {};
+  const editProductById = async (updatedObj) => {
+    await fetch(`http://localhost:8000/api/product/`, {
+      method: 'PUT',
+      body: JSON.stringify(updatedObj),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    });
+    getAllProducts();
+  };
   return (
     <ProductsContext.Provider
       value={{
@@ -51,6 +84,10 @@ const ProductsContextProvider = ({ children }) => {
         removeProductById,
         newlyCreatedProduct,
         setNewlyCreatedProduct,
+        getOneProductById,
+        clearForm,
+        updatedProduct,
+        setUpdatedProduct,
       }}
     >
       {children}

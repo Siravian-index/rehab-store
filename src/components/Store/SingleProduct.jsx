@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { ProductsContext } from '../../context/ProductsContext';
+import { Link } from 'react-router-dom';
 
 const SingleProduct = ({ item }) => {
   const { removeProductById } = useContext(ProductsContext);
@@ -32,14 +33,16 @@ const SingleProduct = ({ item }) => {
         >
           Delete
         </button>
-        <button
-          className='bg-transparent border border-gray-500 text-gray-500 hover:bg-gray-500 hover:text-white text-center py-1 px-2 rounded'
-          onClick={() => {
-            console.log('/edit/:id');
-          }}
-        >
-          Edit
-        </button>
+        <Link to={`/edit/product/${item._id}`}>
+          <button
+            className='bg-transparent border border-gray-500 text-gray-500 hover:bg-gray-500 hover:text-white text-center py-1 px-2 rounded'
+            onClick={() => {
+              console.log('/edit/:id');
+            }}
+          >
+            Edit
+          </button>
+        </Link>
       </div>
     </li>
   );

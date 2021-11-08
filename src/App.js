@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Sells from './components/Sells/Sells';
+import EditProduct from './components/Store/EditProduct';
 import Store from './components/Store/Store';
 import WelcomePage from './components/WelcomePage';
 // context
@@ -24,20 +25,25 @@ const App = () => {
       <Router>
         <Navbar />
         <Switch>
-          <Route path='/store'>
+          <Route exact path='/store'>
             <ProductsContextProvider>
               <Store />
             </ProductsContextProvider>
           </Route>
-          <Route path='/sells'>
+          <Route exact path='/edit/product/:id'>
+            <ProductsContextProvider>
+              <EditProduct />
+            </ProductsContextProvider>
+          </Route>
+          <Route exact path='/sells'>
             <ProductsContextProvider>
               <SellsContextProvider>
                 <Sells />
               </SellsContextProvider>
             </ProductsContextProvider>
           </Route>
-          <Route path='/users'></Route>
-          <Route path='/'>
+          <Route exact path='/users'></Route>
+          <Route exact path='/'>
             <div>{/* action boxes */}</div>
             <Footer />
           </Route>

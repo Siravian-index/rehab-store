@@ -2,17 +2,13 @@ import { useContext } from 'react';
 import { ProductsContext } from '../../context/ProductsContext';
 
 const NewProduct = () => {
-  const { createProduct, newlyCreatedProduct, setNewlyCreatedProduct } =
-    useContext(ProductsContext);
+  const {
+    createProduct,
+    newlyCreatedProduct,
+    setNewlyCreatedProduct,
+    clearForm,
+  } = useContext(ProductsContext);
 
-  const clearForm = () => {
-    setNewlyCreatedProduct({
-      productName: '',
-      description: '',
-      productPrice: '',
-      status: '',
-    });
-  };
   return (
     <div>
       <form
