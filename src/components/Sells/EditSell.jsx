@@ -1,18 +1,13 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { SellsContext } from '../../context/SellsContext';
 import { ProductsContext } from '../../context/ProductsContext';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useParams } from 'react-router';
 
 const EditSell = () => {
-  const { products } = useContext(ProductsContext);
-  const { user } = useAuth0();
-  const { id } = useParams();
+  const [updated, setUpdated] = useState(false);
 
-  console.log(products);
   const {
-    newSell,
-    setNewSell,
     formValues,
     clearForm,
     delimiter,
@@ -24,20 +19,53 @@ const EditSell = () => {
     getTotal,
     updatedSell,
     setUpdatedSell,
+    updateSetUpdatedSell,
+    getOneSellById,
+    editSellById,
   } = useContext(SellsContext);
+  const { products } = useContext(ProductsContext);
+  const { user } = useAuth0();
+  const { id } = useParams();
+
+  useEffect(() => {
+    getOneSellById(id);
+  }, []);
+
   useEffect(() => {
     setTotal(getTotal(formValues));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formValues]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    if (isMounted) {
+      updateSetUpdatedSell(user.name, formValues);
+    }
+    return () => {
+      isMounted = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [total, formValues]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setUpdated(false);
+    }, 3000);
+  }, [updated]);
+  const sellUpdatedSuccessfully = () => {
+    return <p>Sell updated Successfully! Return now.</p>;
+  };
   return (
     <div>
+      <div></div>
       <h3 className='text-center my-5'>Edit Sell</h3>
       <h3 className='text-center my-5'>Sell's id: {id}</h3>
 
       <form
-        action='POST'
         onSubmit={(event) => {
           event.preventDefault();
+          editSellById(updatedSell);
         }}
         className='flex flex-col justify-center items-center gap-5'
       >
@@ -47,10 +75,10 @@ const EditSell = () => {
             id='client'
             type='text'
             placeholder='Client Name'
-            value={newSell.clientName}
+            value={updatedSell.clientName}
             onChange={(e) => {
-              setNewSell({
-                ...newSell,
+              setUpdatedSell({
+                ...updatedSell,
                 clientName: e.target.value,
               });
             }}
@@ -62,15 +90,16 @@ const EditSell = () => {
             id='client'
             type='number'
             placeholder='Client ID'
-            value={newSell.clientID}
+            value={updatedSell.clientID}
             onChange={(e) => {
-              setNewSell({
-                ...newSell,
+              setUpdatedSell({
+                ...updatedSell,
                 clientID: e.target.value,
               });
             }}
           />
         </label>
+
         {formValues.map((element, index) => (
           <div className='flex justify-center items-center gap-x-5' key={index}>
             <select
@@ -82,6 +111,7 @@ const EditSell = () => {
               <option defaultValue value='noProduct'>
                 Select Product
               </option>
+
               {products.map((product, index) => (
                 <option
                   key={index}
@@ -129,11 +159,17 @@ const EditSell = () => {
         <button
           className='bg-black hover:bg-gray-900 text-white text-center py-2 px-4 rounded'
           type='submit'
+          onClick={() => setUpdated(true)}
         >
           Submit
         </button>
       </form>
-      <div className='flex justify-center items-center mt-4'>
+      <div className='flex flex-col justify-center items-center mt-4'>
+        {updated && (
+          <div className='flex justify-center items-center'>
+            {sellUpdatedSuccessfully()}
+          </div>
+        )}
         <button
           className='bg-black hover:bg-gray-900 text-white text-center py-2 px-4 rounded'
           onClick={() => clearForm()}

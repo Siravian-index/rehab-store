@@ -69,7 +69,16 @@ const SellsContextProvider = ({ children }) => {
   };
 
   // edit product
-  const editSellById = async (id) => {};
+  const editSellById = async (updatedObj) => {
+    await fetch(`http://localhost:8000/api/sell/`, {
+      method: 'PUT',
+      body: JSON.stringify(updatedObj),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    });
+    getAllSells();
+  };
 
   // -------------------------------------
   // newSell Logic
@@ -120,7 +129,9 @@ const SellsContextProvider = ({ children }) => {
       return prev;
     }, 0);
   };
-
+  // this functions is to set the obj state in the NewSell File
+  // DO NOT confuse it with the similar function to set the obj state
+  // on the EditSell
   const updateNewSellState = async (sellerName, arr) => {
     let products = arr.reduce((prev, obj) => {
       let [product, price] = obj.product.split(delimiter);
@@ -135,6 +146,26 @@ const SellsContextProvider = ({ children }) => {
     }, []);
     await setNewSell({
       ...newSell,
+      totalValue: total,
+      sellerName: sellerName,
+      products: products,
+    });
+  };
+
+  const updateSetUpdatedSell = async (sellerName, arr) => {
+    let products = arr.reduce((prev, obj) => {
+      let [product, price] = obj.product.split(delimiter);
+      if (product && price) {
+        prev.push({
+          productName: product,
+          productPrice: price,
+          productAmount: obj.productAmount,
+        });
+      }
+      return prev;
+    }, []);
+    setUpdatedSell({
+      ...updatedSell,
       totalValue: total,
       sellerName: sellerName,
       products: products,
@@ -164,6 +195,7 @@ const SellsContextProvider = ({ children }) => {
         removeFormFields,
         getTotal,
         updateNewSellState,
+        updateSetUpdatedSell,
       }}
     >
       {children}
