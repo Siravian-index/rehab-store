@@ -89,7 +89,7 @@ const NewProduct = () => {
           className='bg-black hover:bg-gray-900 text-white text-center py-2 px-4 rounded'
           type='submit'
         >
-          Submit1
+          Submit
         </button>
       </form>
     </div>

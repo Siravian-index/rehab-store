@@ -3,6 +3,9 @@ import { createContext, useEffect, useState } from 'react';
 export const ProductsContext = createContext(null);
 
 const ProductsContextProvider = ({ children }) => {
+  const herokuURL = 'https://limitless-reaches-36434.herokuapp.com/';
+  // const localhost = 'http://localhost:8000/';
+  const fetchFrom = herokuURL;
   const [products, setProducts] = useState([]);
   const [newlyCreatedProduct, setNewlyCreatedProduct] = useState({
     productName: '',
@@ -29,13 +32,13 @@ const ProductsContextProvider = ({ children }) => {
 
   // fetch all products from db
   const getAllProducts = async () => {
-    const res = await fetch('http://localhost:8000/api/products');
+    const res = await fetch(`${fetchFrom}api/products`);
     const products = await res.json();
     setProducts(products.data);
   };
   // get one product by id
   const getOneProductById = async (_id) => {
-    const res = await fetch(`http://localhost:8000/api/product/${_id}`);
+    const res = await fetch(`${fetchFrom}api/product/${_id}`);
     const product = await res.json();
     setUpdatedProduct(product.data);
   };
@@ -46,7 +49,7 @@ const ProductsContextProvider = ({ children }) => {
   }, []);
   // create product
   const createProduct = async (newProductObj) => {
-    await fetch('http://localhost:8000/api/product', {
+    await fetch(`${fetchFrom}api/product`, {
       method: 'POST',
       body: JSON.stringify(newProductObj),
       headers: {
@@ -57,7 +60,7 @@ const ProductsContextProvider = ({ children }) => {
   };
   // remove product
   const removeProductById = (_id) => {
-    fetch(`http://localhost:8000/api/product/${_id}`, {
+    fetch(`${fetchFrom}api/product/${_id}`, {
       method: 'DELETE',
     });
     setProducts((prev) => prev.filter((obj) => obj._id !== _id));
@@ -65,7 +68,7 @@ const ProductsContextProvider = ({ children }) => {
 
   // edit product
   const editProductById = async (updatedObj) => {
-    await fetch(`http://localhost:8000/api/product/`, {
+    await fetch(`${fetchFrom}api/product/`, {
       method: 'PUT',
       body: JSON.stringify(updatedObj),
       headers: {

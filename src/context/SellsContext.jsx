@@ -3,6 +3,10 @@ import { createContext, useState, useEffect } from 'react';
 export const SellsContext = createContext(null);
 
 const SellsContextProvider = ({ children }) => {
+  const herokuURL = 'https://limitless-reaches-36434.herokuapp.com/';
+  // const localhost = 'http://localhost:8000/';
+  const fetchFrom = herokuURL;
+
   const [sellList, setSellList] = useState([]);
   const [newSell, setNewSell] = useState({
     clientName: '',
@@ -34,13 +38,13 @@ const SellsContextProvider = ({ children }) => {
   });
   // fetch all sells from db
   const getAllSells = async () => {
-    const res = await fetch('http://localhost:8000/api/sells');
+    const res = await fetch(`${fetchFrom}api/sells`);
     const sells = await res.json();
     setSellList(sells.data);
   };
   // get one sell by id
   const getOneSellById = async (_id) => {
-    const res = await fetch(`http://localhost:8000/api/sell/${_id}`);
+    const res = await fetch(`${fetchFrom}api/sell/${_id}`);
     const sell = await res.json();
     setUpdatedSell(sell.data);
   };
@@ -51,7 +55,7 @@ const SellsContextProvider = ({ children }) => {
   }, []);
   // create product
   const createSell = async (newSellObj) => {
-    await fetch('http://localhost:8000/api/sell', {
+    await fetch(`${fetchFrom}api/sell`, {
       method: 'POST',
       body: JSON.stringify(newSellObj),
       headers: {
@@ -63,7 +67,7 @@ const SellsContextProvider = ({ children }) => {
   };
   // remove product
   const removeSellById = (_id) => {
-    fetch(`http://localhost:8000/api/sell/${_id}`, {
+    fetch(`${fetchFrom}api/sell/${_id}`, {
       method: 'DELETE',
     });
     setSellList((prev) => prev.filter((obj) => obj._id !== _id));
@@ -71,7 +75,7 @@ const SellsContextProvider = ({ children }) => {
 
   // edit product
   const editSellById = async (updatedObj) => {
-    await fetch(`http://localhost:8000/api/sell/`, {
+    await fetch(`${fetchFrom}api/sell/`, {
       method: 'PUT',
       body: JSON.stringify(updatedObj),
       headers: {
