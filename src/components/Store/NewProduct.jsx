@@ -23,6 +23,7 @@ const NewProduct = () => {
         <label htmlFor='productName'>
           <input
             required
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             id='productName'
             type='text'
             placeholder='Product Name'
@@ -39,6 +40,7 @@ const NewProduct = () => {
           <input
             type='text'
             required
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             id='description'
             placeholder='Product description'
             value={newlyCreatedProduct.description}
@@ -53,6 +55,7 @@ const NewProduct = () => {
         <label htmlFor='productPrice'>
           <input
             required
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             id='productPrice'
             type='text'
             placeholder='Product Price'
@@ -68,6 +71,7 @@ const NewProduct = () => {
         <label htmlFor='status'>
           <input
             required
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             id='status'
             type='text'
             placeholder='Status'
@@ -85,7 +89,7 @@ const NewProduct = () => {
           className='bg-black hover:bg-gray-900 text-white text-center py-2 px-4 rounded'
           type='submit'
         >
-          Add
+          Submit1
         </button>
       </form>
     </div>

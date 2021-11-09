@@ -17,7 +17,7 @@ const SearchBar = () => {
     <>
       <div className='flex flex-col items-center justify-center gap-1'>
         <input
-          className='p-3'
+          className='shadow appearance-none border rounded mb-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           type='text'
           placeholder='Search by:'
           value={searchValue}
@@ -38,8 +38,7 @@ const SearchBar = () => {
           <option value='_id'>Product's Id</option>
         </select>
       </div>
-      {/* <ul className='flex flex-col md:flex-row md:justify-around md:items-center flex-wrap'> */}
-      <ul className='md:w-1/3 mx-auto my-3 border px-4'>
+      <ul className='md:w-11/12 md:flex md:flex-wrap md:gap-4 md:justify-around  mx-auto my-3 border px-4'>
         {filteredSells.map((item) => {
           return <SingleSell item={item} key={item._id}></SingleSell>;
         })}

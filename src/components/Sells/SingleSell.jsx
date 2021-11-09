@@ -6,7 +6,7 @@ const SingleSell = ({ item }) => {
   const { removeSellById } = useContext(SellsContext);
 
   return (
-    <li className='text-left my-5'>
+    <li className='text-left my-5 md:p-4'>
       <div>
         <span className='font-bold'>Seller:</span> {item.sellerName}
       </div>

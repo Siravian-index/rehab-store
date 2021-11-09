@@ -47,6 +47,7 @@ const NewSell = () => {
       >
         <label htmlFor='client'>
           <input
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             required
             id='client'
             type='text'
@@ -62,6 +63,7 @@ const NewSell = () => {
         </label>
         <label htmlFor='client'>
           <input
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             required
             id='client'
             type='number'
@@ -97,6 +99,7 @@ const NewSell = () => {
             </select>
             <label>
               <input
+                className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 type='number'
                 min='1'
                 max='99'
@@ -120,7 +123,7 @@ const NewSell = () => {
         ))}
         <div className='button-section'>
           <button
-            className='bg-black hover:bg-gray-900 text-white text-center py-2 px-4 rounded'
+            className='bg-transparent border border-green-500 text-green-500 hover:bg-green-500 hover:text-white text-center py-2 px-4 rounded'
             type='button'
             onClick={() => addFormFields()}
           >
@@ -130,16 +133,18 @@ const NewSell = () => {
         <div>
           <p>Total: {total} </p>
         </div>
-        <button
-          className='bg-black hover:bg-gray-900 text-white text-center py-2 px-4 rounded'
-          type='submit'
-        >
-          Submit
-        </button>
+        {total > 0 && (
+          <button
+            className='bg-black hover:bg-gray-900 text-white text-center py-2 px-4 rounded'
+            type='submit'
+          >
+            Submit
+          </button>
+        )}
       </form>
       <div className='flex justify-center items-center mt-4'>
         <button
-          className='bg-black hover:bg-gray-900 text-white text-center py-2 px-4 rounded'
+          className='bg-transparent border border-black text-black hover:bg-black hover:text-white text-center py-2 px-4 rounded'
           onClick={() => clearForm()}
         >
           Clear

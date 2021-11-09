@@ -58,6 +58,7 @@ const SellsContextProvider = ({ children }) => {
         'Content-type': 'application/json; charset=UTF-8',
       },
     });
+    clearForm();
     getAllSells();
   };
   // remove product

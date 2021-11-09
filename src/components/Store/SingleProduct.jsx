@@ -6,7 +6,7 @@ const SingleProduct = ({ item }) => {
   const { removeProductById } = useContext(ProductsContext);
 
   return (
-    <li className='text-left my-5'>
+    <li className='text-left my-5 md:p-4'>
       <div>
         <span className='font-bold'>Product Name:</span> {item.productName}
       </div>
