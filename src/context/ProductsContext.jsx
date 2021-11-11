@@ -5,6 +5,7 @@ export const ProductsContext = createContext(null);
 const ProductsContextProvider = ({ children }) => {
   const herokuURL = 'https://limitless-reaches-36434.herokuapp.com/';
   // const localhost = 'http://localhost:8000/';
+  const [action, setAction] = useState('');
   const fetchFrom = herokuURL;
   const [products, setProducts] = useState([]);
   const [newlyCreatedProduct, setNewlyCreatedProduct] = useState({
@@ -46,6 +47,7 @@ const ProductsContextProvider = ({ children }) => {
   // place all the products in state
   useEffect(() => {
     getAllProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // create product
   const createProduct = async (newProductObj) => {
@@ -91,6 +93,8 @@ const ProductsContextProvider = ({ children }) => {
         clearForm,
         updatedProduct,
         setUpdatedProduct,
+        action,
+        setAction,
       }}
     >
       {children}

@@ -7,10 +7,11 @@ import EditSell from './components/Sells/EditSell';
 import Sells from './components/Sells/Sells';
 import EditProduct from './components/Store/EditProduct';
 import Store from './components/Store/Store';
+import EditUser from './components/Users/EditUser';
+import SetUserGmail from './components/Users/SetUserGmail';
+import Users from './components/Users/Users';
 import WelcomePage from './components/WelcomePage';
 // context
-import ProductsContextProvider from './context/ProductsContext';
-import SellsContextProvider from './context/SellsContext';
 
 const App = () => {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -24,33 +25,27 @@ const App = () => {
   } else {
     return (
       <Router>
+        <SetUserGmail />
         <Navbar />
         <Switch>
           <Route exact path='/store'>
-            <ProductsContextProvider>
-              <Store />
-            </ProductsContextProvider>
+            <Store />
           </Route>
           <Route exact path='/edit/product/:id'>
-            <ProductsContextProvider>
-              <EditProduct />
-            </ProductsContextProvider>
+            <EditProduct />
           </Route>
           <Route exact path='/sells'>
-            <ProductsContextProvider>
-              <SellsContextProvider>
-                <Sells />
-              </SellsContextProvider>
-            </ProductsContextProvider>
+            <Sells />
           </Route>
           <Route exact path='/edit/sell/:id'>
-            <ProductsContextProvider>
-              <SellsContextProvider>
-                <EditSell />
-              </SellsContextProvider>
-            </ProductsContextProvider>
+            <EditSell />
           </Route>
-          <Route exact path='/users'></Route>
+          <Route exact path='/users'>
+            <Users />
+          </Route>
+          <Route path='/edit/user/:id'>
+            <EditUser />
+          </Route>
           <Route exact path='/'>
             <div>{/* action boxes */}</div>
             <Footer />

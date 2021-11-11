@@ -12,6 +12,7 @@ const EditProduct = () => {
     setUpdatedProduct,
     clearForm,
     getOneProductById,
+    setAction,
   } = useContext(ProductsContext);
 
   useEffect(() => {
@@ -19,6 +20,7 @@ const EditProduct = () => {
     // setUpdatedProduct on that obj
     // which puts all the product info into updatedProduct
     getOneProductById(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -117,7 +119,9 @@ const EditProduct = () => {
         <Link to='/store'>
           <button
             className='bg-black hover:bg-gray-900 text-white text-center py-2 px-4 rounded'
-            type='submit'
+            onClick={() => {
+              setAction('list');
+            }}
           >
             Go back
           </button>

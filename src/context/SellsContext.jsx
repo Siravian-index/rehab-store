@@ -52,6 +52,7 @@ const SellsContextProvider = ({ children }) => {
   // place all the products in state
   useEffect(() => {
     getAllSells();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // create product
   const createSell = async (newSellObj) => {

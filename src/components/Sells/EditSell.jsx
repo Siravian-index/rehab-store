@@ -29,6 +29,7 @@ const EditSell = () => {
 
   useEffect(() => {
     getOneSellById(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
