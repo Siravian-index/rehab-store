@@ -8,14 +8,16 @@ const Users = () => {
 
   return (
     <div className='mt-4'>
-      <div className='flex flex-col justify-center items-center gap-y-2'>
-        <h3>Current user is {currentUser.email}</h3>
-        <h3>Current role is {currentUser.rol}</h3>
-        <h3>Current role is {currentUser.status}</h3>
+      <div className='w-1/3 m-auto mb-4'>
+        <div className='flex flex-col justify-center items-start gap-y-1'>
+          <h3 className=''>Current user is {currentUser.email}</h3>
+          <h3 className=''>Current role is {currentUser.rol}</h3>
+          <h3 className=''>Current role is {currentUser.status}</h3>
+        </div>
       </div>
       {userRol === admin && userStatus === authorized ? (
         <>
-          <h2 className='text-center'>List of users</h2>
+          <h2 className='text-center text-lg'>List of users</h2>
           <div className='w-10/12 m-auto flex justify-center items-center flex-wrap gap-5  mt-5'>
             {usersList.map((user) => (
               <div key={user._id} className='border p-4'>
@@ -49,7 +51,7 @@ const Users = () => {
         </>
       ) : (
         <div className='flex justify-center items-center'>
-          <p className='mt-5'>You should not be here but it's ok</p>
+          <p className='mt-5'>You should not be here, but it's ok</p>
         </div>
       )}
     </div>

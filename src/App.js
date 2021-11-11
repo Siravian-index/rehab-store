@@ -1,7 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import ActionBoxes from './components/ActionBoxes';
 // components
-import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import EditSell from './components/Sells/EditSell';
 import Sells from './components/Sells/Sells';
@@ -47,8 +47,7 @@ const App = () => {
             <EditUser />
           </Route>
           <Route exact path='/'>
-            <div>{/* action boxes */}</div>
-            <Footer />
+            <ActionBoxes />
           </Route>
         </Switch>
       </Router>

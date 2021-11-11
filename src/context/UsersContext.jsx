@@ -3,9 +3,9 @@ import { createContext, useEffect, useState } from 'react';
 export const UserContext = createContext(null);
 
 const UsersContextProvider = ({ children }) => {
-  // const herokuURL = 'https://limitless-reaches-36434.herokuapp.com/';
-  const localhost = 'http://localhost:8000/';
-  const fetchFrom = localhost;
+  const herokuURL = 'https://limitless-reaches-36434.herokuapp.com/';
+  // const localhost = 'http://localhost:8000/';
+  const fetchFrom = herokuURL;
   const [usersList, setUsersList] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
   const [userToEdit, setUserToEdit] = useState({});

@@ -15,18 +15,22 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className=' md:w-10/12 m-auto flex justify-between items-center mt-1'>
+      <nav className=' md:w-10/12 m-auto flex justify-between items-center mt-1 border-b'>
         <ul className='md:w-1/2 w-2/3 flex justify-evenly items-center'>
           <li>
             <Link to='/'>
               <img
                 className='object-contain h-10 w-full'
                 src={user.picture}
-                alt={user.name}
+                alt='Gmail img'
               />
             </Link>
           </li>
-          {size.width > 590 && <li>{user.name}</li>}
+          {size.width > 590 && (
+            <Link to='/'>
+              <li className='hover:text-blue-700'>{user.name}</li>
+            </Link>
+          )}
           {(userRol === admin || seller) && userStatus === authorized && (
             <>
               <li className='hover:text-blue-700'>
