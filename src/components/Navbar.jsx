@@ -22,11 +22,15 @@ const Navbar = () => {
               <img
                 className='object-contain h-10 w-full'
                 src={user.picture}
-                alt={user.name}
+                alt='Gmail img'
               />
             </Link>
           </li>
-          {size.width > 590 && <li>{user.name}</li>}
+          {size.width > 590 && (
+            <Link to='/'>
+              <li className='hover:text-blue-700'>{user.name}</li>
+            </Link>
+          )}
           {(userRol === admin || seller) && userStatus === authorized && (
             <>
               <li className='hover:text-blue-700'>
