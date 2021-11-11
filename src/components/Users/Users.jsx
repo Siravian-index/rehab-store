@@ -12,40 +12,41 @@ const Users = () => {
         <h3>Current user is {currentUser.email}</h3>
         <h3>Current role is {currentUser.rol}</h3>
         <h3>Current role is {currentUser.status}</h3>
-
-        <h2>List of users</h2>
       </div>
       {userRol === admin && userStatus === authorized ? (
-        <div className='w-10/12 m-auto flex justify-center items-center flex-wrap gap-5  mt-5'>
-          {usersList.map((user) => (
-            <div key={user._id} className='border p-4'>
-              <div>
-                <span className='font-bold'>Email: </span>
-                {user.email}
+        <>
+          <h2 className='text-center'>List of users</h2>
+          <div className='w-10/12 m-auto flex justify-center items-center flex-wrap gap-5  mt-5'>
+            {usersList.map((user) => (
+              <div key={user._id} className='border p-4'>
+                <div>
+                  <span className='font-bold'>Email: </span>
+                  {user.email}
+                </div>
+                <div>
+                  <span className='font-bold'>Status: </span>
+                  {user.status}
+                </div>
+                <div>
+                  <span className='font-bold'>Rol: </span>
+                  {user.rol}
+                </div>
+                <div className='mt-4'>
+                  <Link
+                    to={{
+                      pathname: `/edit/user/${user._id}`,
+                      state: { user },
+                    }}
+                  >
+                    <button className='bg-transparent border border-gray-500 text-gray-500 hover:bg-gray-500 hover:text-white text-center py-1 px-2 rounded'>
+                      Edit
+                    </button>
+                  </Link>
+                </div>
               </div>
-              <div>
-                <span className='font-bold'>Status: </span>
-                {user.status}
-              </div>
-              <div>
-                <span className='font-bold'>Rol: </span>
-                {user.rol}
-              </div>
-              <div className='mt-4'>
-                <Link
-                  to={{
-                    pathname: `/edit/user/${user._id}`,
-                    state: { user },
-                  }}
-                >
-                  <button className='bg-transparent border border-gray-500 text-gray-500 hover:bg-gray-500 hover:text-white text-center py-1 px-2 rounded'>
-                    Edit
-                  </button>
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </>
       ) : (
         <div className='flex justify-center items-center'>
           <p className='mt-5'>You should not be here but it's ok</p>
