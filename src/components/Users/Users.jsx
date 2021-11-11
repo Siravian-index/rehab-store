@@ -51,7 +51,7 @@ const Users = () => {
         </>
       ) : (
         <div className='flex justify-center items-center'>
-          <p className='mt-5'>You should not be here but it's ok</p>
+          <p className='mt-5'>You should not be here, but it's ok</p>
         </div>
       )}
     </div>
